@@ -6,6 +6,7 @@
 <title>Sistah Vibes · DJ, productora y presentadora · Tenerife</title>
 <meta name="description" content="Sistah Vibes (Karla León): DJ, productora y presentadora oficial del Rototom Sunsplash. Reggae, dancehall, Afro House, Afro Tech y Amapiano desde Tenerife para Europa y América. Booking por WhatsApp.">
 <meta name="theme-color" content="#0e0c0a">
+<meta name="author" content="Ezencia · felixrohde.com">
 <link rel="icon" type="image/png" href="assets/img/favicon.png">
 <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -320,14 +321,43 @@ a.pk:hover{border-color:var(--accent)}
 @media (max-width:760px){.press-grid{grid-template-columns:1fr}.pk{min-height:0}}
 
 /* Footer */
-footer{padding:56px 0 calc(110px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+footer{border-top:1px solid var(--line)}
+footer>.wrap{padding-block:48px}
+footer>.wrap>p{margin-right:auto}
 footer .mark{width:72px;height:auto;opacity:.9}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
 footer p{margin:0;font-size:14px;color:var(--dim)}
 footer nav{display:flex;gap:18px;flex-wrap:wrap}
 footer nav a{font-size:14px;color:var(--muted);text-decoration:none}
 footer nav a:hover{color:var(--accent)}
-@media (min-width:900px){footer{padding-bottom:56px}}
+/* Ezencia signature (shared component from karlaleon.com, NuMA), themed to the page tokens */
+.sig{border-top:1px solid var(--line);background:var(--ink-2)}
+.sig .wrap{padding-block:30px calc(30px + env(safe-area-inset-bottom));display:flex;justify-content:center}
+.ez{display:inline-flex;align-items:center;gap:22px;text-decoration:none;color:var(--paper);padding:12px 18px;border-radius:16px;transition:background-color .35s ease}
+[data-theme="afro"] .ez{border-radius:2px}
+.ez:hover,.ez:focus-visible{background:color-mix(in srgb,var(--paper) 4.5%,transparent)}
+.ez-by{display:grid;gap:7px;text-align:right;padding-right:22px;border-right:1px solid color-mix(in srgb,var(--accent) 32%,transparent);font:500 10px/1 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.ez-by b{font-weight:500;color:color-mix(in srgb,var(--accent) 70%,var(--paper))}
+.ez-row{display:inline-flex;align-items:center;gap:14px}
+.ez-z{position:relative;width:44px;height:44px;flex:none;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));transition:transform .45s cubic-bezier(.2,.7,.2,1)}
+.ez-z img{position:absolute;inset:0;width:100%;height:100%;transition:opacity .45s ease}
+.ez-z .g{opacity:0}
+.ez:hover .ez-z,.ez:focus-visible .ez-z{transform:rotate(-6deg)}
+.ez:hover .ez-z .g,.ez:focus-visible .ez-z .g{opacity:1}
+.ez-wm{display:block;height:36px;width:auto}
+.ez-go{font:500 11px/1 var(--body);letter-spacing:.08em;color:var(--muted);padding:8px 12px;border:1px solid var(--line);border-radius:999px;transition:color .3s,border-color .3s}
+[data-theme="afro"] .ez-go{border-radius:2px}
+.ez:hover .ez-go,.ez:focus-visible .ez-go{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 60%,transparent)}
+@media (max-width:899px){.sig .wrap{padding-bottom:calc(104px + env(safe-area-inset-bottom))}}
+@media (max-width:640px){
+  .ez{flex-direction:column;gap:16px;padding:14px 10px}
+  .ez-by{text-align:center;border-right:0;padding-right:0;display:block;line-height:1.6}
+  .ez-by br{display:none}
+  .ez-by b::before{content:" "}
+  .ez-z{width:40px;height:40px}
+  .ez-wm{height:32px}
+}
+@media (prefers-reduced-motion:reduce){.ez-z,.ez-z img,.ez-go{transition:none}}
 
 /* Mobile booking bar */
 .mbar{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:60;display:flex;gap:8px;padding:8px;border-radius:999px;background:color-mix(in srgb,var(--ink-2) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
@@ -687,6 +717,18 @@ footer nav a:hover{color:var(--accent)}
       <a href="#presskit">Press kit</a>
     </nav>
   </div>
+  <div class="sig">
+    <div class="wrap">
+      <a class="ez" href="https://felixrohde.com/" target="_blank" rel="noopener" data-i18n-aria="ez.aria" aria-label="Identidad de marca y diseño web: Ezencia, Tenerife (felixrohde.com)">
+        <span class="ez-by" data-i18n="ez.by"></span>
+        <span class="ez-row">
+          <span class="ez-z" aria-hidden="true"><img src="assets/img/ezencia/ezencia-zeichen-knochen.png" width="44" height="44" alt="" loading="lazy" decoding="async"><img class="g" src="assets/img/ezencia/ezencia-zeichen-gold.png" width="44" height="44" alt="" loading="lazy" decoding="async"></span>
+          <img class="ez-wm" src="assets/img/ezencia/ezencia-schriftzug-hell.webp" width="162" height="36" alt="Ezencia · Tenerife" loading="lazy" decoding="async">
+        </span>
+        <span class="ez-go" aria-hidden="true">felixrohde.com ↗</span>
+      </a>
+    </div>
+  </div>
 </footer>
 
 <div class="mbar" id="mbar">
@@ -772,6 +814,7 @@ es: {
   "wa.channel":"Hola Sistah Vibes, quiero recibir el aviso del estreno de Black Beats Radio y nuevas fechas.",
   "pk.h":"Press kit","pk.lead":"Biografía, trayectoria, rider y contacto en PDF. Fotos de prensa, logo en alta resolución y vídeo presentando bajo petición.",
   "pk.meta":"PDF · 5 páginas · 6,6 MB","pk.morebig":"IT · DE · FR","pk.more":"Otros idiomas y fotos HD","pk.moresub":"Pídelos por WhatsApp",
+  "ez.by":"Identidad de marca<br><b>y diseño web por</b>","ez.aria":"Identidad de marca y diseño web: Ezencia, Tenerife (felixrohde.com)",
   "pk.req":"Hola Sistah Vibes, ¿me podéis enviar fotos de prensa en alta resolución, logo y el press kit en otro idioma?"
 },
 en: {
@@ -840,6 +883,7 @@ en: {
   "wa.channel":"Hi Sistah Vibes, please let me know when Black Beats Radio launches and about new dates.",
   "pk.h":"Press kit","pk.lead":"Bio, timeline, rider and contact as a PDF. Press photos, full-resolution logo and hosting video on request.",
   "pk.meta":"PDF · 5 pages · 6.6 MB","pk.morebig":"IT · DE · FR","pk.more":"Other languages and HD photos","pk.moresub":"Request them on WhatsApp",
+  "ez.by":"Brand identity<br><b>and web design by</b>","ez.aria":"Brand identity and web design: Ezencia, Tenerife (felixrohde.com)",
   "pk.req":"Hi Sistah Vibes, could you send me high-res press photos, the logo and the press kit in another language?"
 }};
 
