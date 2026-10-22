@@ -77,7 +77,7 @@ p{max-width:64ch}
 .nav.solid{background:color-mix(in srgb,var(--ink) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-color:var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:20px;height:64px}
 .brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;letter-spacing:-.01em;font-size:15px}
-.brand img{width:34px;height:auto}
+.brand img{width:32px;height:auto}
 .nav-links{display:flex;gap:22px;margin-left:auto;list-style:none;padding:0}
 .nav-links a{text-decoration:none;font-size:14px;color:var(--muted);transition:color .2s}
 .nav-links a:hover{color:var(--paper)}
@@ -142,6 +142,20 @@ p{max-width:64ch}
 /* ---------- Sections ---------- */
 section.s{padding-block:clamp(72px,11vw,140px)}
 .s-alt{background:var(--ink-2)}
+
+/* Photo strip */
+.strip{position:relative;padding-block:clamp(40px,6vw,72px) 0}
+.strip-track{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-inline:var(--gutter);scroll-padding-inline:var(--gutter);overscroll-behavior-x:contain}
+.strip-track::-webkit-scrollbar{display:none}
+.strip-track figure{margin:0;flex:none;height:clamp(300px,46vw,520px);scroll-snap-align:start}
+.strip-track img{height:100%;width:auto;border-radius:calc(var(--radius) - 4px);object-fit:cover;background:var(--ink-3)}
+.strip-nav{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+.strip-nav button{all:unset;cursor:pointer;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--paper)}
+.strip-nav button:hover{border-color:var(--accent);color:var(--accent)}
+.strip-nav button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.strip-nav svg{width:18px;height:18px}
+[data-theme="afro"] .strip-nav button{border-radius:2px}
+@media (hover:none){.strip-nav{display:none}}
 
 /* Bio */
 .bio{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,6vw,88px);align-items:start}
@@ -307,6 +321,7 @@ a.pk:hover{border-color:var(--accent)}
 
 /* Footer */
 footer{padding:56px 0 calc(110px + env(safe-area-inset-bottom));border-top:1px solid var(--line)}
+footer .mark{width:72px;height:auto;opacity:.9}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:center}
 footer p{margin:0;font-size:14px;color:var(--dim)}
 footer nav{display:flex;gap:18px;flex-wrap:wrap}
@@ -326,7 +341,7 @@ footer nav a:hover{color:var(--accent)}
 
 <header class="nav" id="nav">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Sistah Vibes"><img src="assets/img/logo.png" width="34" height="38" alt=""><span>Sistah Vibes</span></a>
+    <a class="brand" href="#top" aria-label="Sistah Vibes"><img src="assets/img/logo.png" width="32" height="39" alt=""><span>Sistah Vibes</span></a>
     <ul class="nav-links">
       <li><a href="#contrata" data-i18n="nav.book"></a></li>
       <li><a href="#historia" data-i18n="nav.bio"></a></li>
@@ -381,6 +396,24 @@ footer nav a:hover{color:var(--accent)}
       <div class="stat" role="listitem"><b>3</b><span data-i18n="stat.4"></span></div>
     </div>
   </div>
+
+  <!-- PHOTO STRIP -->
+  <section class="strip" aria-label="Fotos">
+    <div class="strip-track" id="strip" tabindex="0">
+      <figure><img src="assets/img/shoot-1.webp" width="1100" height="1087" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/img/shoot-3.webp" width="1100" height="749" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/img/shoot-4.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/img/gallery-2.webp" width="900" height="1125" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/img/shoot-5.webp" width="1100" height="732" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/img/shoot-2.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/img/shoot-7.webp" width="1100" height="725" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img src="assets/img/shoot-6.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
+    </div>
+    <div class="wrap strip-nav">
+      <button type="button" data-strip="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" data-strip="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
+  </section>
 
   <!-- BOOK HER AS -->
   <section class="s" id="contrata" aria-labelledby="book-h">
@@ -535,7 +568,7 @@ footer nav a:hover{color:var(--accent)}
       <div id="ig-live" hidden></div>
       <div class="ig-grid" id="ig-grid">
         <a href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener"><img src="assets/img/gallery-1.webp" width="900" height="1120" alt="Sistah Vibes en cabina" data-i18n-alt="alt.g1" loading="lazy" decoding="async"></a>
-        <a href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener"><img src="assets/img/gallery-2.webp" width="900" height="1125" alt="Sistah Vibes bailando" data-i18n-alt="alt.g2" loading="lazy" decoding="async"></a>
+        <a href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener"><img src="assets/img/shoot-8.webp" width="1100" height="732" alt="Sistah Vibes" data-i18n-alt="alt.g2" loading="lazy" decoding="async"></a>
         <a href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener"><img src="assets/img/gallery-3.webp" width="900" height="593" alt="Retrato de Sistah Vibes" data-i18n-alt="alt.g3" loading="lazy" decoding="async"></a>
         <a href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener"><img src="assets/img/gallery-4.webp" width="900" height="780" alt="Sistah Vibes con collar afro" data-i18n-alt="alt.g4" loading="lazy" decoding="async"></a>
       </div>
@@ -645,6 +678,7 @@ footer nav a:hover{color:var(--accent)}
 <div class="tricolor" aria-hidden="true"></div>
 <footer>
   <div class="wrap">
+    <img class="mark" src="assets/img/logo-320.webp" width="320" height="386" alt="Sistah Vibes" loading="lazy">
     <p>© <span id="yr"></span> Sistah Vibes · Tenerife, Islas Canarias</p>
     <nav aria-label="Social">
       <a href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener">Instagram</a>
@@ -718,7 +752,7 @@ es: {
   "rd.p":"Su propio programa sobre la cultura y la historia de la música negra, del soul y el funk al dancehall, los afrobeats y el Afro House. Ese mismo conocimiento guía cada sesión.",
   "rd.cta":"Avísame del estreno",
   "ig.kicker":"Directo, escenarios y presentaciones","ig.follow":"Seguir en Instagram",
-  "alt.g1":"Sistah Vibes en cabina","alt.g2":"Sistah Vibes bailando","alt.g3":"Retrato de Sistah Vibes","alt.g4":"Sistah Vibes con collar afro",
+  "alt.g1":"Sistah Vibes en cabina","alt.g2":"Sistah Vibes en sesión de fotos","alt.g3":"Retrato de Sistah Vibes","alt.g4":"Sistah Vibes con collar afro",
   "tl.h":"De selectora roots <span class='l2'>a productora de Afro House.</span>",
   "tl.items":[["17 años","Costa Rica","Primeras sesiones como selectora: reggae, dancehall, ska, calypso."],["2011","Islas Canarias","Se instala en Tenerife y no ha dejado de pinchar desde entonces."],["2013","Nafricao, La Laguna","Residencia."],["2014–15","Bahía Beach Club, Tenerife","Residencia."],["2023–24","Marriott, Tenerife","Residencia."],["Liberia","Temporada en Monrovia","Abraza sus raíces afrolatinas y se abre a los sonidos electrónicos."],["2024","Festival Arena Negra","Presentadora y DJ. Lanzamiento de Pum Pum Mammy."],["2026","Reggae Can · Mojitos Vacilón · Arena Negra","La Gomera, Santa Cruz de Tenerife, Fuerteventura."]],
   "pl.h":"Ha pinchado en",
@@ -786,7 +820,7 @@ en: {
   "rd.p":"Her own show on the culture and history of Black music, from soul and funk to dancehall, afrobeats and Afro House. The same knowledge drives every set.",
   "rd.cta":"Tell me when it launches",
   "ig.kicker":"Live, festival stages and hosting","ig.follow":"Follow on Instagram",
-  "alt.g1":"Sistah Vibes behind the decks","alt.g2":"Sistah Vibes dancing","alt.g3":"Portrait of Sistah Vibes","alt.g4":"Sistah Vibes wearing an Afro necklace",
+  "alt.g1":"Sistah Vibes behind the decks","alt.g2":"Sistah Vibes photo shoot","alt.g3":"Portrait of Sistah Vibes","alt.g4":"Sistah Vibes wearing an Afro necklace",
   "tl.h":"From roots selector <span class='l2'>to Afro House producer.</span>",
   "tl.items":[["Age 17","Costa Rica","First sets as a selector: reggae, dancehall, ska, calypso."],["2011","Canary Islands","Moves to Tenerife and plays without a break ever since."],["2013","Nafricao, La Laguna","Residency."],["2014–15","Bahía Beach Club, Tenerife","Residency."],["2023–24","Marriott, Tenerife","Residency."],["Liberia","A season in Monrovia","Embraces her Afro-Latin roots, turns to electronic sounds."],["2024","Festival Arena Negra","Host & DJ. Pum Pum Mammy released."],["2026","Reggae Can · Mojitos Vacilón · Arena Negra","La Gomera, Santa Cruz de Tenerife, Fuerteventura."]],
   "pl.h":"Played in",
@@ -866,6 +900,10 @@ if (CONFIG.beholdFeedId){
   live.hidden = false; document.getElementById("ig-grid").hidden = true;
   const s = document.createElement("script"); s.type = "module"; s.src = "https://w.behold.so/widget.js"; document.head.append(s);
 }
+
+// Photo strip buttons
+const strip = document.getElementById("strip");
+document.querySelectorAll("[data-strip]").forEach(b => b.addEventListener("click", () => strip.scrollBy({left: +b.dataset.strip * strip.clientWidth * .8, behavior: "smooth"})));
 
 // Booking form → WhatsApp
 document.getElementById("bk-form").addEventListener("submit", e => {
