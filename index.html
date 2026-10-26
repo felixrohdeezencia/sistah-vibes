@@ -27,7 +27,7 @@
 /* ---------- Tokens ---------- */
 :root{
   --ink:#0e0c0a; --ink-2:#161310; --ink-3:#1f1b17; --line:#2b2620;
-  --paper:#f4efe6; --muted:#a69e91; --dim:#6f685e;
+  --paper:#f4efe6; --muted:#a69e91; --dim:#8a8276;
   --gold:#f4b636; --red:#d4382c; --green:#2f9e4f;
   --accent:var(--gold); --accent-ink:#140f04;
   --display:"Inter Tight", system-ui, sans-serif;
@@ -39,7 +39,7 @@
 }
 [data-theme="afro"]{
   --ink:#090807; --ink-2:#120f0c; --ink-3:#1a1611; --line:#2e2619;
-  --paper:#efe6d6; --muted:#a79a85; --dim:#6e6352;
+  --paper:#efe6d6; --muted:#a79a85; --dim:#8a7f6c;
   --gold:#c99a52; --red:#a8452b; --green:#556b3a;
   --accent:#d4a35a; --accent-ink:#120c04;
   --display:"Bodoni Moda", Georgia, serif;
@@ -50,6 +50,7 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:72px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
 body{margin:0;background:var(--ink);color:var(--paper);font:400 17px/1.6 var(--body);font-feature-settings:"ss01","cv11";-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .5s,color .5s}
+[hidden]{display:none!important}
 img{display:block;max-width:100%;height:auto}
 a{color:inherit}
 :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px}
@@ -69,8 +70,6 @@ a{color:inherit}
 h2.h{font-family:var(--display);font-weight:var(--display-weight);font-style:var(--display-style);letter-spacing:calc(var(--display-track) * .6);font-size:clamp(34px,5.4vw,64px);line-height:1.02;margin:0 0 .5em;max-width:16ch}
 [data-theme="roots"] h2.h{font-weight:800}
 h2.h .l2{display:block;color:var(--accent)}
-.kicker{font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 18px}
-[data-theme="afro"] .kicker{letter-spacing:.08em;text-transform:none;font-family:var(--display);font-style:italic;font-size:18px;font-weight:400}
 .lead{font-size:clamp(18px,1.6vw,21px);line-height:1.55;color:var(--paper);max-width:58ch}
 p{max-width:64ch}
 .muted{color:var(--muted)}
@@ -86,7 +85,8 @@ p{max-width:64ch}
 .nav-links a:hover{color:var(--paper)}
 .toggles{display:flex;gap:8px;align-items:center}
 .seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:3px;background:var(--ink-2)}
-.seg button{all:unset;cursor:pointer;font-size:12.5px;font-weight:600;padding:6px 11px;border-radius:999px;color:var(--muted);letter-spacing:.02em}
+.seg button{all:unset;cursor:pointer;font-size:12.5px;font-weight:600;padding:0 11px;min-height:32px;display:inline-grid;place-items:center;border-radius:999px;color:var(--muted);letter-spacing:.02em}
+@media (pointer:coarse){.seg button{min-height:44px;min-width:44px}.brand{min-height:44px}.links-row .chip{min-height:44px}footer nav a{display:inline-flex;align-items:center;min-height:44px}}
 .seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
 .seg button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:0 22px;border-radius:999px;font:600 15px/1 var(--body);text-decoration:none;border:1.5px solid var(--accent);cursor:pointer;transition:transform .15s,background-color .2s,color .2s}
@@ -165,7 +165,7 @@ section.s{padding-block:clamp(72px,11vw,140px)}
 .bio figure{margin:0;position:sticky;top:96px}
 .bio figure img{border-radius:var(--radius);width:100%;aspect-ratio:2/3;object-fit:cover}
 .bio figcaption{font-size:13px;color:var(--dim);margin-top:10px}
-.pull{border-left:3px solid var(--accent);padding:4px 0 4px 20px;margin:32px 0;font-size:clamp(20px,2vw,26px);font-weight:600;line-height:1.3;max-width:30ch}
+.pull{margin:40px 0 32px;padding-top:22px;border-top:1px solid var(--line);font-size:clamp(22px,2.3vw,30px);font-weight:600;line-height:1.25;letter-spacing:-.01em;max-width:28ch;text-wrap:balance}
 [data-theme="afro"] .pull{font-family:var(--display);font-style:italic;font-weight:400}
 .glance{display:grid;grid-template-columns:1fr 1fr;gap:0 28px;margin-top:36px;border-top:1px solid var(--line)}
 .glance div{padding:14px 0;border-bottom:1px solid var(--line);font-size:15px}
@@ -189,13 +189,16 @@ section.s{padding-block:clamp(72px,11vw,140px)}
 /* Rototom */
 .rototom{position:relative;overflow:hidden;background:var(--ink)}
 .rototom-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(32px,6vw,80px);align-items:center}
-.rt-word{font-family:var(--display);font-weight:var(--display-weight);font-style:var(--display-style);text-transform:var(--display-case);letter-spacing:var(--display-track);font-size:clamp(56px,10vw,150px);line-height:.85;margin:0}
+.rt-copy{container-type:inline-size;min-width:0}
+.rt-word{font-family:var(--display);font-weight:var(--display-weight);font-style:var(--display-style);text-transform:var(--display-case);letter-spacing:var(--display-track);font-size:clamp(46px,16.5cqi,150px);line-height:.85;margin:0}
 .rt-word span{display:block;color:var(--accent)}
 .rt-card{border:1px solid var(--line);border-radius:var(--radius);padding:28px;background:var(--ink-2)}
 .rt-card .big{font-family:var(--display);font-weight:var(--display-weight);font-style:var(--display-style);font-size:clamp(48px,6vw,76px);line-height:1;color:var(--accent);letter-spacing:-.03em}
 [data-theme="roots"] .rt-card .big{font-weight:800}
 .rt-card p{margin:8px 0 0;color:var(--muted);font-size:15px}
 .rt-card+.rt-card{margin-top:14px}
+.rt-aside h3{font-size:15px;font-weight:600;color:var(--muted);margin:0 0 12px}
+[data-theme="afro"] .rt-aside h3{font-family:var(--display);font-style:italic;font-weight:400;font-size:19px}
 @media (max-width:860px){.rototom-grid{grid-template-columns:1fr}}
 
 /* Partner wall */
@@ -258,7 +261,7 @@ section.s{padding-block:clamp(72px,11vw,140px)}
 
 /* Instagram */
 .ig-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:20px}
-.ig-handle{font-family:var(--display);font-weight:var(--display-weight);font-style:var(--display-style);font-size:clamp(40px,7.5vw,104px);letter-spacing:var(--display-track);line-height:.95;margin:0;text-decoration:none;display:block;word-break:break-word}
+.ig-handle{padding-block:4px;font-family:var(--display);font-weight:var(--display-weight);font-style:var(--display-style);font-size:clamp(40px,7.5vw,104px);letter-spacing:var(--display-track);line-height:.95;margin:0;text-decoration:none;display:block;word-break:break-word}
 [data-theme="roots"] .ig-handle{font-weight:800;text-transform:none}
 .ig-handle:hover{color:var(--accent)}
 .ig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:36px}
@@ -299,6 +302,10 @@ section.s{padding-block:clamp(72px,11vw,140px)}
 .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
 .field input::-webkit-calendar-picker-indicator{filter:invert(.8)}
 .form .btn{width:100%;margin-top:6px}
+.field label.req::after{content:" *";color:var(--accent)}
+.field [aria-invalid="true"]{border-color:var(--red)}
+.form-err{margin:2px 0 12px;padding:12px 14px;border-radius:calc(var(--radius) - 6px);background:color-mix(in srgb,var(--red) 14%,transparent);color:var(--paper);font-size:15px}
+.form-err[hidden]{display:none}
 .form-note{font-size:13px;color:var(--dim);margin:12px 0 0}
 .direct{display:grid;gap:10px;margin-top:28px}
 .direct a{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:16px 0;border-top:1px solid var(--line);text-decoration:none;font-size:16px}
@@ -338,7 +345,7 @@ footer nav a:hover{color:var(--accent)}
 .ez{display:inline-flex;align-items:center;gap:22px;text-decoration:none;color:var(--paper);padding:12px 18px;border-radius:16px;transition:background-color .35s ease}
 [data-theme="afro"] .ez{border-radius:2px}
 .ez:hover,.ez:focus-visible{background:color-mix(in srgb,var(--paper) 4.5%,transparent)}
-.ez-by{display:grid;gap:7px;text-align:right;padding-right:22px;border-right:1px solid color-mix(in srgb,var(--accent) 32%,transparent);font:500 10px/1 var(--body);letter-spacing:.24em;text-transform:uppercase;color:var(--dim)}
+.ez-by{display:grid;gap:7px;text-align:right;padding-right:22px;border-right:1px solid color-mix(in srgb,var(--accent) 32%,transparent);font:500 12px/1 var(--body);letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
 .ez-by b{font-weight:500;color:color-mix(in srgb,var(--accent) 70%,var(--paper))}
 .ez-row{display:inline-flex;align-items:center;gap:14px}
 .ez-z{position:relative;width:44px;height:44px;flex:none;filter:drop-shadow(0 8px 14px rgba(0,0,0,.35));transition:transform .45s cubic-bezier(.2,.7,.2,1)}
@@ -375,7 +382,7 @@ footer nav a:hover{color:var(--accent)}
   <div class="wrap">
     <a class="brand" href="#top" aria-label="Sistah Vibes"><img src="assets/img/logo.png" width="32" height="39" alt=""><span>Sistah Vibes</span></a>
     <ul class="nav-links">
-      <li><a href="#contrata" data-i18n="nav.book"></a></li>
+      <li><a href="#contrata" data-i18n="nav.formats"></a></li>
       <li><a href="#historia" data-i18n="nav.bio"></a></li>
       <li><a href="#rototom">Rototom</a></li>
       <li><a href="#escucha" data-i18n="nav.listen"></a></li>
@@ -403,10 +410,10 @@ footer nav a:hover{color:var(--accent)}
     <div class="hero-media">
       <img class="only-roots" src="assets/img/hero-1400.webp"
            srcset="assets/img/hero-800.webp 800w, assets/img/hero-1400.webp 1400w, assets/img/hero-2000.webp 2000w"
-           sizes="(min-width: 900px) 62vw, 100vw" width="1400" height="1708" alt="" fetchpriority="high">
+           sizes="(min-width: 900px) 62vw, 100vw" width="1400" height="1708" alt="Sistah Vibes" fetchpriority="high">
       <img class="only-afro" src="assets/img/portrait-1064.webp"
            srcset="assets/img/portrait-800.webp 800w, assets/img/portrait-1064.webp 1064w"
-           sizes="(min-width: 900px) 62vw, 100vw" width="1064" height="1600" alt="" loading="lazy">
+           sizes="(min-width: 900px) 62vw, 100vw" width="1064" height="1600" alt="Sistah Vibes" loading="lazy" id="hero-afro">
     </div>
     <div class="wrap hero-inner">
       <p class="hero-roles" data-i18n="hero.roles"></p>
@@ -414,7 +421,7 @@ footer nav a:hover{color:var(--accent)}
       <p class="hero-tag" data-i18n="hero.tag"></p>
       <div class="hero-cta">
         <a class="btn btn-solid" data-wa href="#booking"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.7.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg><span data-i18n="cta.date"></span></a>
-        <a class="btn btn-ghost" href="#presskit" data-i18n="cta.presskit"></a>
+        <a class="btn btn-ghost" data-pk download href="assets/press/Sistah-Vibes_Presskit_ES.pdf" data-i18n="cta.presskit"></a>
       </div>
       <ul class="genres" data-i18n-list="hero.genres"></ul>
     </div>
@@ -424,26 +431,26 @@ footer nav a:hover{color:var(--accent)}
     <div class="wrap">
       <div class="stat" role="listitem"><b data-i18n="stat.1b"></b><span data-i18n="stat.1"></span></div>
       <div class="stat" role="listitem"><b>12+</b><span data-i18n="stat.2"></span></div>
-      <div class="stat" role="listitem"><b>15.000+</b><span data-i18n="stat.3"></span></div>
+      <div class="stat" role="listitem"><b data-i18n="n.15k"></b><span data-i18n="stat.3"></span></div>
       <div class="stat" role="listitem"><b>3</b><span data-i18n="stat.4"></span></div>
     </div>
   </div>
 
   <!-- PHOTO STRIP -->
-  <section class="strip" aria-label="Fotos">
-    <div class="strip-track" id="strip" tabindex="0">
-      <figure><img src="assets/img/shoot-1.webp" width="1100" height="1087" alt="" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/img/shoot-3.webp" width="1100" height="749" alt="" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/img/shoot-4.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/img/gallery-2.webp" width="900" height="1125" alt="" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/img/shoot-5.webp" width="1100" height="732" alt="" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/img/shoot-2.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/img/shoot-7.webp" width="1100" height="725" alt="" loading="lazy" decoding="async"></figure>
-      <figure><img src="assets/img/shoot-6.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
+  <section class="strip" data-i18n-aria="aria.strip" aria-label="Fotos">
+    <div class="strip-track" id="strip" tabindex="0" data-i18n-aria="aria.strip" aria-label="Fotos">
+      <figure><img data-i18n-alt="alt.shoot" src="assets/img/shoot-1.webp" width="1100" height="1087" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img data-i18n-alt="alt.shoot" src="assets/img/shoot-3.webp" width="1100" height="749" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img data-i18n-alt="alt.shoot" src="assets/img/shoot-4.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img data-i18n-alt="alt.shoot" src="assets/img/gallery-2.webp" width="900" height="1125" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img data-i18n-alt="alt.shoot" src="assets/img/shoot-5.webp" width="1100" height="732" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img data-i18n-alt="alt.shoot" src="assets/img/shoot-2.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img data-i18n-alt="alt.shoot" src="assets/img/shoot-7.webp" width="1100" height="725" alt="" loading="lazy" decoding="async"></figure>
+      <figure><img data-i18n-alt="alt.shoot" src="assets/img/shoot-6.webp" width="732" height="1100" alt="" loading="lazy" decoding="async"></figure>
     </div>
     <div class="wrap strip-nav">
-      <button type="button" data-strip="-1" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
-      <button type="button" data-strip="1" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
+      <button type="button" data-strip="-1" data-i18n-aria="aria.prev" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <button type="button" data-strip="1" data-i18n-aria="aria.next" aria-label="Siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg></button>
     </div>
   </section>
 
@@ -506,14 +513,14 @@ footer nav a:hover{color:var(--accent)}
   <section class="s rototom" id="rototom" aria-labelledby="rt-h">
     <div class="wrap">
       <div class="rototom-grid">
-        <div>
-          <p class="kicker" data-i18n="rt.kicker"></p>
+        <div class="rt-copy">
           <h2 class="rt-word" id="rt-h">Rototom <span>Sunsplash</span></h2>
           <p class="lead" style="margin-top:28px" data-i18n="rt.p"></p>
           <a class="btn btn-ghost" style="margin-top:12px" href="https://rototomsunsplash.com/" target="_blank" rel="noopener" data-i18n="rt.link"></a>
         </div>
-        <div>
-          <div class="rt-card"><div class="big">15.000+</div><p data-i18n="rt.c1"></p></div>
+        <div class="rt-aside">
+          <h3>Festival Arena Negra · Fuerteventura</h3>
+          <div class="rt-card"><div class="big" data-i18n="n.15k"></div><p data-i18n="rt.c1"></p></div>
           <div class="rt-card"><div class="big" data-i18n="rt.c2b"></div><p data-i18n="rt.c2"></p></div>
         </div>
       </div>
@@ -591,8 +598,8 @@ footer nav a:hover{color:var(--accent)}
     <div class="wrap">
       <div class="ig-head">
         <div>
-          <p class="kicker" id="ig-h" data-i18n="ig.kicker"></p>
-          <a class="ig-handle" href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener">@sistah_vibes</a>
+          <h2 id="ig-h" style="margin:0"><a class="ig-handle" href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener">@sistah_vibes</a></h2>
+          <p class="muted" style="margin:14px 0 0" data-i18n="ig.kicker"></p>
         </div>
         <a class="btn btn-solid" href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener" data-i18n="ig.follow"></a>
       </div>
@@ -660,7 +667,7 @@ footer nav a:hover{color:var(--accent)}
       </div>
       <form class="form" id="bk-form" novalidate>
         <div class="form-row">
-          <div class="field"><label for="f-date" data-i18n="f.date"></label><input id="f-date" name="date" type="date" required></div>
+          <div class="field"><label for="f-date" class="req" data-i18n="f.date"></label><input id="f-date" name="date" type="date" required aria-describedby="f-err"></div>
           <div class="field"><label for="f-format" data-i18n="f.format"></label>
             <select id="f-format" name="format">
               <option value="dj" data-i18n="f.o1"></option>
@@ -669,15 +676,16 @@ footer nav a:hover{color:var(--accent)}
             </select></div>
         </div>
         <div class="form-row">
-          <div class="field"><label for="f-city" data-i18n="f.city"></label><input id="f-city" name="city" autocomplete="address-level2" required></div>
+          <div class="field"><label for="f-city" class="req" data-i18n="f.city"></label><input id="f-city" name="city" autocomplete="address-level2" required aria-describedby="f-err"></div>
           <div class="field"><label for="f-venue" data-i18n="f.venue"></label><input id="f-venue" name="venue"></div>
         </div>
         <div class="form-row">
           <div class="field"><label for="f-name" data-i18n="f.name"></label><input id="f-name" name="name" autocomplete="name"></div>
           <div class="field"><label for="f-hours" data-i18n="f.hours"></label>
-            <select id="f-hours" name="hours"><option>1 h</option><option selected>2 h</option><option>3 h</option><option>4 h</option></select></div>
+            <select id="f-hours" name="hours"><option>1 h</option><option selected>2 h</option><option>3 h</option><option>4 h</option><option value="multi" data-i18n="f.multi"></option></select></div>
         </div>
         <div class="field"><label for="f-msg" data-i18n="f.msg"></label><textarea id="f-msg" name="msg"></textarea></div>
+        <p class="form-err" id="f-err" role="alert" hidden></p>
         <button class="btn btn-solid" type="submit" data-i18n="f.send"></button>
         <p class="form-note" data-i18n="f.note"></p>
       </form>
@@ -699,7 +707,7 @@ footer nav a:hover{color:var(--accent)}
           <span><b>Press kit</b><small data-i18n="pk.meta"></small></span>
         </a>
         <a class="pk" data-wa-text="pk.req" href="#">
-          <span class="lang" style="font-size:30px" data-i18n="pk.morebig"></span>
+          <span class="lang" data-i18n="pk.morebig"></span>
           <span><b data-i18n="pk.more"></b><small data-i18n="pk.moresub"></small></span>
         </a>
       </div>
@@ -711,7 +719,7 @@ footer nav a:hover{color:var(--accent)}
 <footer>
   <div class="wrap">
     <img class="mark" src="assets/img/logo-320.webp" width="320" height="386" alt="Sistah Vibes" loading="lazy">
-    <p>© <span id="yr"></span> Sistah Vibes · Tenerife, Islas Canarias</p>
+    <p>© <span id="yr"></span> Sistah Vibes · <span data-i18n="g.base.v"></span></p>
     <nav aria-label="Social">
       <a href="https://www.instagram.com/sistah_vibes/" target="_blank" rel="noopener">Instagram</a>
       <a data-link="soundcloud" href="https://soundcloud.com/sistah-vibes" target="_blank" rel="noopener">SoundCloud</a>
@@ -751,7 +759,7 @@ const CONFIG = {
 
 const I18N = {
 es: {
-  "nav.bio":"Historia","nav.book":"Contrátala","nav.listen":"Escucha",
+  "nav.bio":"Historia","nav.book":"Contrátala","nav.formats":"Formatos","n.15k":"15.000+","aria.strip":"Fotos de Sistah Vibes","aria.prev":"Fotos anteriores","aria.next":"Fotos siguientes","alt.shoot":"Sistah Vibes, sesión de fotos","f.multi":"Festival, varios días","f.errDate":"Elige la fecha del evento.","f.errPast":"La fecha ya ha pasado. Elige una fecha a partir de hoy.","f.errCity":"Indica ciudad y país para poder responderte.","f.popup":"Si WhatsApp no se abre, escribe al +34 625 70 39 00.","nav.listen":"Escucha",
   "aria.theme":"Estilo de la página",
   "cta.book":"Booking","cta.date":"Consultar fecha","cta.presskit":"Descargar press kit","cta.wa":"Consultar fecha",
   "hero.roles":"DJ, productora y presentadora de festivales",
@@ -782,11 +790,11 @@ es: {
   "r3.list":[["Pum Pum Mammy","remix de Afro-Flux, Wicked Jam Productions, 2024"],["Marfil","producción original de Afro House"],["Edits en directo","sus temas integrados en la sesión"]],
   "r3.foot":"Identidad afrolatina, hecha para la pista.",
   "rt.kicker":"Presentadora oficial",
-  "rt.p":"La voz que mantiene en pie el festival de reggae más grande del mundo en Benicàssim: decenas de miles de personas, artistas de todo el mundo y una sola voz entre actuación y actuación.",
+  "rt.p":"Presentadora en el escenario del festival de reggae más grande del mundo, Benicàssim 2023: decenas de miles de personas, artistas de todo el mundo y una sola voz entre actuación y actuación.",
   "rt.link":"rototomsunsplash.com",
-  "rt.c1":"solo en la primera noche del Festival Arena Negra 2024, Fuerteventura, como presentadora y DJ",
+  "rt.c1":"personas solo en la primera noche de 2024, con ella como presentadora y DJ",
   "rt.c2b":"Nov 2026","rt.c2":"vuelve al Arena Negra, de nuevo como DJ y presentadora",
-  "pt.h":"Festivales, residencias y sellos","pt.rototom":"Presentadora oficial","pt.label":"Sello · Pum Pum Mammy","pt.res2324":"Residencia 2023–24","pt.res1415":"Residencia 2014–15","pt.res13":"La Laguna · residencia 2013",
+  "pt.h":"Festivales, residencias y sellos","pt.rototom":"Presentadora · 2023","pt.label":"Sello · Pum Pum Mammy","pt.res2324":"Residencia 2023–24","pt.res1415":"Residencia 2014–15","pt.res13":"La Laguna · residencia 2013",
   "pt.bills":"Ha compartido cartel en Festival Arena Negra 2024 y 2026 (Fuerteventura) y XII Reggae Can Festival 2026 (La Gomera).",
   "ls.h":"Escúchala primero. <span class='l2'>Después, contrátala.</span>",
   "ls.sc":"Sesiones en SoundCloud","ls.scsub":"Afro House Live Mix, Ibiza Afro House Set, Reggae Radio Rototom y más · pulsa para escuchar",
@@ -795,7 +803,7 @@ es: {
   "rd.soon":"Próximamente",
   "rd.p":"Su propio programa sobre la cultura y la historia de la música negra, del soul y el funk al dancehall, los afrobeats y el Afro House. Ese mismo conocimiento guía cada sesión.",
   "rd.cta":"Avísame del estreno",
-  "ig.kicker":"Directo, escenarios y presentaciones","ig.follow":"Seguir en Instagram",
+  "ig.kicker":"Clips, escenarios y el día a día.","ig.follow":"Seguir en Instagram",
   "alt.g1":"Sistah Vibes en cabina","alt.g2":"Sistah Vibes en sesión de fotos","alt.g3":"Retrato de Sistah Vibes","alt.g4":"Sistah Vibes con collar afro",
   "tl.h":"De selectora roots <span class='l2'>a productora de Afro House.</span>",
   "tl.items":[["17 años","Costa Rica","Primeras sesiones como selectora: reggae, dancehall, ska, calypso."],["2011","Islas Canarias","Se instala en Tenerife y no ha dejado de pinchar desde entonces."],["2013","Nafricao, La Laguna","Residencia."],["2014–15","Bahía Beach Club, Tenerife","Residencia."],["2023–24","Marriott, Tenerife","Residencia."],["Liberia","Temporada en Monrovia","Abraza sus raíces afrolatinas y se abre a los sonidos electrónicos."],["2024","Festival Arena Negra","Presentadora y DJ. Lanzamiento de Pum Pum Mammy."],["2026","Reggae Can · Mojitos Vacilón · Arena Negra","La Gomera, Santa Cruz de Tenerife, Fuerteventura."]],
@@ -815,12 +823,12 @@ es: {
   "wa.form":"Hola Sistah Vibes, consulta de booking:\n• Fecha: {date}\n• Lugar: {city}{venue}\n• Formato: {format} · {hours}\n• De: {name}\n{msg}",
   "wa.channel":"Hola Sistah Vibes, quiero recibir el aviso del estreno de Black Beats Radio y nuevas fechas.",
   "pk.h":"Press kit","pk.lead":"Biografía, trayectoria, rider y contacto en PDF. Fotos de prensa, logo en alta resolución y vídeo presentando bajo petición.",
-  "pk.meta":"PDF · 5 páginas · 6,6 MB","pk.morebig":"IT · DE · FR","pk.more":"Otros idiomas y fotos HD","pk.moresub":"Pídelos por WhatsApp",
+  "pk.meta":"PDF · 5 páginas · 6,6 MB","pk.morebig":"HD","pk.more":"Fotos de prensa y logo","pk.moresub":"Bajo petición por WhatsApp",
   "ez.by":"Identidad de marca<br><b>y diseño web por</b>","ez.aria":"Identidad de marca y diseño web: Ezencia, Tenerife (felixrohde.com)",
-  "pk.req":"Hola Sistah Vibes, ¿me podéis enviar fotos de prensa en alta resolución, logo y el press kit en otro idioma?"
+  "pk.req":"Hola Sistah Vibes, ¿me podéis enviar fotos de prensa en alta resolución y el logo?"
 },
 en: {
-  "nav.bio":"Story","nav.book":"Book her","nav.listen":"Listen",
+  "nav.bio":"Story","nav.book":"Book her","nav.formats":"Formats","n.15k":"15,000+","aria.strip":"Photos of Sistah Vibes","aria.prev":"Previous photos","aria.next":"Next photos","alt.shoot":"Sistah Vibes, photo shoot","f.multi":"Festival, several days","f.errDate":"Choose the event date.","f.errPast":"That date has passed. Choose today or later.","f.errCity":"Add city and country so she can answer.","f.popup":"If WhatsApp does not open, message +34 625 70 39 00.","nav.listen":"Listen",
   "aria.theme":"Page style",
   "cta.book":"Booking","cta.date":"Check a date","cta.presskit":"Download press kit","cta.wa":"Check a date",
   "hero.roles":"DJ, producer and festival host",
@@ -851,11 +859,11 @@ en: {
   "r3.list":[["Pum Pum Mammy","Afro-Flux remix, Wicked Jam Productions, 2024"],["Marfil","original Afro House production"],["Live edits","her tracks woven into the set"]],
   "r3.foot":"Afro-Latin identity, built for the floor.",
   "rt.kicker":"Official presenter",
-  "rt.p":"The voice that carries the world’s biggest reggae festival in Benicàssim, Spain: tens of thousands of people, artists from all over the world, and one voice between the acts.",
+  "rt.p":"Host on stage at the world’s biggest reggae festival, Benicàssim 2023: tens of thousands of people, artists from all over the world, and one voice between the acts.",
   "rt.link":"rototomsunsplash.com",
-  "rt.c1":"on opening night alone at Festival Arena Negra 2024, Fuerteventura, as host and DJ",
+  "rt.c1":"people on opening night alone in 2024, with her as host and DJ",
   "rt.c2b":"Nov 2026","rt.c2":"back at Arena Negra, performing and presenting again",
-  "pt.h":"Festivals, residencies and labels","pt.rototom":"Official presenter","pt.label":"Label · Pum Pum Mammy","pt.res2324":"Residency 2023–24","pt.res1415":"Residency 2014–15","pt.res13":"La Laguna · residency 2013",
+  "pt.h":"Festivals, residencies and labels","pt.rototom":"Host · 2023","pt.label":"Label · Pum Pum Mammy","pt.res2324":"Residency 2023–24","pt.res1415":"Residency 2014–15","pt.res13":"La Laguna · residency 2013",
   "pt.bills":"Shared festival bills at Festival Arena Negra 2024 & 2026 (Fuerteventura) and XII Reggae Can Festival 2026 (La Gomera).",
   "ls.h":"Hear her first. <span class='l2'>Then book her.</span>",
   "ls.sc":"Sets on SoundCloud","ls.scsub":"Afro House Live Mix, Ibiza Afro House Set, Reggae Radio Rototom and more · tap to play",
@@ -864,7 +872,7 @@ en: {
   "rd.soon":"Coming soon",
   "rd.p":"Her own show on the culture and history of Black music, from soul and funk to dancehall, afrobeats and Afro House. The same knowledge drives every set.",
   "rd.cta":"Tell me when it launches",
-  "ig.kicker":"Live, festival stages and hosting","ig.follow":"Follow on Instagram",
+  "ig.kicker":"Clips, stages and everyday life.","ig.follow":"Follow on Instagram",
   "alt.g1":"Sistah Vibes behind the decks","alt.g2":"Sistah Vibes photo shoot","alt.g3":"Portrait of Sistah Vibes","alt.g4":"Sistah Vibes wearing an Afro necklace",
   "tl.h":"From roots selector <span class='l2'>to Afro House producer.</span>",
   "tl.items":[["Age 17","Costa Rica","First sets as a selector: reggae, dancehall, ska, calypso."],["2011","Canary Islands","Moves to Tenerife and plays without a break ever since."],["2013","Nafricao, La Laguna","Residency."],["2014–15","Bahía Beach Club, Tenerife","Residency."],["2023–24","Marriott, Tenerife","Residency."],["Liberia","A season in Monrovia","Embraces her Afro-Latin roots, turns to electronic sounds."],["2024","Festival Arena Negra","Host & DJ. Pum Pum Mammy released."],["2026","Reggae Can · Mojitos Vacilón · Arena Negra","La Gomera, Santa Cruz de Tenerife, Fuerteventura."]],
@@ -884,9 +892,9 @@ en: {
   "wa.form":"Hi Sistah Vibes, booking request:\n• Date: {date}\n• Where: {city}{venue}\n• Format: {format} · {hours}\n• From: {name}\n{msg}",
   "wa.channel":"Hi Sistah Vibes, please let me know when Black Beats Radio launches and about new dates.",
   "pk.h":"Press kit","pk.lead":"Bio, timeline, rider and contact as a PDF. Press photos, full-resolution logo and hosting video on request.",
-  "pk.meta":"PDF · 5 pages · 6.6 MB","pk.morebig":"IT · DE · FR","pk.more":"Other languages and HD photos","pk.moresub":"Request them on WhatsApp",
+  "pk.meta":"PDF · 5 pages · 6.6 MB","pk.morebig":"HD","pk.more":"Press photos and logo","pk.moresub":"On request via WhatsApp",
   "ez.by":"Brand identity<br><b>and web design by</b>","ez.aria":"Brand identity and web design: Ezencia, Tenerife (felixrohde.com)",
-  "pk.req":"Hi Sistah Vibes, could you send me high-res press photos, the logo and the press kit in another language?"
+  "pk.req":"Hi Sistah Vibes, could you send me high-res press photos and the logo?"
 }};
 
 const root = document.documentElement;
@@ -910,7 +918,9 @@ function render(){
   document.querySelectorAll("[data-i18n-countries]").forEach(el => el.innerHTML = t(el.dataset.i18nCountries).map(c => c[0]==="*" ? `<li class="far">${esc(c.slice(1))}</li>` : `<li>${esc(c)}</li>`).join(""));
   document.querySelectorAll("[data-wa]").forEach(a => { a.href = waURL(t("wa.hello")); a.target = "_blank"; a.rel = "noopener"; });
   document.querySelectorAll("[data-wa-text]").forEach(a => { a.href = waURL(t(a.dataset.waText)); a.target = "_blank"; a.rel = "noopener"; });
-  document.querySelectorAll("[data-channel]").forEach(a => { a.href = CONFIG.whatsappChannel || waURL(t("wa.channel")); a.target = "_blank"; a.rel = "noopener"; });
+  document.querySelectorAll("[data-channel]").forEach(a => { a.hidden = !CONFIG.whatsappChannel; a.href = CONFIG.whatsappChannel || "#"; a.target = "_blank"; a.rel = "noopener"; });
+  document.querySelectorAll("[data-pk]").forEach(a => a.href = `assets/press/Sistah-Vibes_Presskit_${lang === "en" ? "EN" : "ES"}.pdf`);
+  if (theme === "afro") document.getElementById("hero-afro").loading = "eager";
   document.querySelectorAll("[data-set-lang]").forEach(b => b.setAttribute("aria-pressed", b.dataset.setLang === lang));
   document.querySelectorAll("[data-set-theme]").forEach(b => b.setAttribute("aria-pressed", b.dataset.setTheme === theme));
   document.title = lang === "es" ? "Sistah Vibes · DJ, productora y presentadora · Tenerife" : "Sistah Vibes · DJ, producer and festival host · Tenerife";
@@ -952,14 +962,24 @@ const strip = document.getElementById("strip");
 document.querySelectorAll("[data-strip]").forEach(b => b.addEventListener("click", () => strip.scrollBy({left: +b.dataset.strip * strip.clientWidth * .8, behavior: "smooth"})));
 
 // Booking form → WhatsApp
+const today = () => { const n = new Date(); return `${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,"0")}-${String(n.getDate()).padStart(2,"0")}`; };
+document.getElementById("f-date").min = today();
 document.getElementById("bk-form").addEventListener("submit", e => {
   e.preventDefault();
   const f = new FormData(e.target), v = k => (f.get(k) || "").toString().trim();
-  if (!v("date") || !v("city")){ alert(t("f.err")); (v("date") ? e.target.city : e.target.date).focus(); return; }
-  const fmt = e.target.format.selectedOptions[0].textContent;
-  const msg = t("wa.form").replace("{date}", v("date")).replace("{city}", v("city")).replace("{venue}", v("venue") ? " · " + v("venue") : "")
-    .replace("{format}", fmt).replace("{hours}", v("hours")).replace("{name}", v("name") || "–").replace("{msg}", v("msg"));
-  window.open(waURL(msg.trim()), "_blank", "noopener");
+  const form = e.target, err = document.getElementById("f-err");
+  const problem = !v("date") ? ["date","f.errDate"] : v("date") < today() ? ["date","f.errPast"] : !v("city") ? ["city","f.errCity"] : null;
+  form.date.setAttribute("aria-invalid", problem?.[0] === "date"); form.city.setAttribute("aria-invalid", problem?.[0] === "city");
+  if (problem){ err.textContent = t(problem[1]); err.hidden = false; form[problem[0]].focus(); return; }
+  err.hidden = true;
+  const [y, mo, d] = v("date").split("-").map(Number);
+  const when = new Intl.DateTimeFormat(lang === "en" ? "en-GB" : "es-ES", {weekday:"short", day:"numeric", month:"short", year:"numeric"}).format(new Date(y, mo - 1, d));
+  const fmt = form.format.selectedOptions[0].textContent;
+  const hours = form.hours.selectedOptions[0].textContent;
+  const msg = t("wa.form").replace("{date}", when).replace("{city}", v("city")).replace("{venue}", v("venue") ? " · " + v("venue") : "")
+    .replace("{format}", fmt).replace("{hours}", hours).replace("{name}", v("name") || "–").replace("{msg}", v("msg"));
+  const url = waURL(msg.trim());
+  if (!window.open(url, "_blank", "noopener")){ err.textContent = t("f.popup"); err.hidden = false; location.href = url; }
 });
 
 // Nav background + mobile booking bar
